@@ -25,7 +25,7 @@
             $('#id').val($(this).closest('tr').find('td:first').text()); 
             $('#userName').val($(this).closest('tr').find('td:nth-child(2)').text()); 
             $('#passWord').val($(this).closest('tr').find('td:nth-child(3)').text());           
-            $('#role').val($(this).closest('tr').find('td:nth-child(4)').text());
+            $('#roless').val($(this).closest('tr').find('td:nth-child(4)').text());
         });
     });
 </script>
@@ -335,7 +335,7 @@
             ID: <input type="text" id="id" name="id" readonly="readonly"/>
             User Name: <input type="text" id="userName" name="userName"/>
             Password: <input type="text" id="passWord" name="passWord"/>
-            Role: <input type="text" id="role" name="role"/>
+            Role: <input type="text" id="roless" name="roless"/>
             <input class="button" id="result" type="submit" value="Update"/><hr/>
             </form>
             <table class="table" id="table">

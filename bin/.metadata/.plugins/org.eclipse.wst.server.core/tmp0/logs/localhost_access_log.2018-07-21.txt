@@ -1,0 +1,16 @@
+127.0.0.1 - - [21/Jul/2018:09:44:03 +0700] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:44:05 +0700] "GET /LibraryManagement/ HTTP/1.1" 200 954
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:44:05 +0700] "GET /LibraryManagement/style/css/login_style.css HTTP/1.1" 200 1418
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:44:05 +0700] "GET /LibraryManagement/style/js/login_script.js HTTP/1.1" 200 264
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:44:05 +0700] "GET /LibraryManagement/style/img/login_avatar.png HTTP/1.1" 200 27270
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:44:05 +0700] "GET /LibraryManagement/style/img/login_background.jpg HTTP/1.1" 200 495805
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:44:18 +0700] "GET /LibraryManagement/ HTTP/1.1" 200 954
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:44:18 +0700] "GET /LibraryManagement/style/css/login_style.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:44:18 +0700] "GET /LibraryManagement/style/js/login_script.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:44:18 +0700] "GET /LibraryManagement/style/img/login_avatar.png HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:44:18 +0700] "GET /LibraryManagement/style/img/login_background.jpg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:44:18 +0700] "GET /favicon.ico HTTP/1.1" 404 1016
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:45:07 +0700] "POST /LibraryManagement/dashboard HTTP/1.1" 200 6137
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:45:07 +0700] "GET /LibraryManagement/style/css/bootstrap.min.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:45:07 +0700] "GET /LibraryManagement/style/js/bootstrap.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [21/Jul/2018:09:45:07 +0700] "GET /LibraryManagement/style/css/index_style.css HTTP/1.1" 304 -

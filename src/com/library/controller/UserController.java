@@ -70,15 +70,15 @@ public class UserController {
 				u.setUserName(username);
 				u.setPassWord(password);
 				u.setRole("student");
+				u.setCanBorrow(0);
+				u.setQuantityOfBookCanBorrow(0);
 				userService.addUser(u);
 				model.addAttribute("message", u);
-				return "Login";
 			}else {
 				model.addAttribute("message", "Fail!");
-				return "Register";
 			}
 		}
-		return null;
+		return "Register";
 	}
 	@RequestMapping("/admin")
 	public String admin(HttpServletRequest request, Model model,  HttpServletResponse response) throws ServletException, IOException {
