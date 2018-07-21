@@ -17,7 +17,19 @@
     <!-- Custom CSS -->
     <link href="style/dist/css/style.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+<script>
+$(document).ready(function(){
+  $("#search").on("keyup", function() {
+    var value = $(this).val();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 <script>
     $(function () {
         $('#table ${"#edit"}').click(function (e) {
@@ -26,6 +38,9 @@
             $('#userName').val($(this).closest('tr').find('td:nth-child(2)').text()); 
             $('#passWord').val($(this).closest('tr').find('td:nth-child(3)').text());           
             $('#roless').val($(this).closest('tr').find('td:nth-child(4)').text());
+            $('#ticketnumber').val($(this).closest('tr').find('td:nth-child(5)').text());
+            $('#quantitycanborrow').val($(this).closest('tr').find('td:nth-child(6)').text());
+            $('#canborrow').val($(this).closest('tr').find('td:nth-child(7)').text());
         });
     });
 </script>
@@ -42,6 +57,23 @@
             }
     }
 </script>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
 </head>
 <body  onload="myFunction()">
 <div class="preloader">
@@ -331,26 +363,51 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-            <form action="updateuser" method="POST">
-            ID: <input type="text" id="id" name="id" readonly="readonly"/>
-            User Name: <input type="text" id="userName" name="userName"/>
-            Password: <input type="text" id="passWord" name="passWord"/>
-            Role: <input type="text" id="roless" name="roless"/>
-            <input class="button" id="result" type="submit" value="Update"/><hr/>
+            <form id="validation" action="updateuser" method="POST">
+            <table class="table">
+            <tr>
+            <td>ID: </td><td><input type="text" id="id" name="id" readonly="readonly"/></td>
+            <td>User Name:</td><td><label for="userName"><input type="text" id="userName" name="userName"/></label></td>
+            </tr>
+            <tr>
+            <td>Password:</td><td><input type="text" id="passWord" name="passWord"/></td>
+            <td>Role: </td><td><input type="text" id="roless" name="roless"/></td>
+            </tr>
+            <tr>
+            <td>Ticket Number: </td><td><input type="text" id="ticketnumber" name="ticketnumber"/></td>
+            <td>Quantity Can Borrow: </td><td><input type="text" id="quantitycanborrow" name="quantitycanborrow"/></td>
+            </tr>
+            <tr>
+            <td>Can Borrow: </td><td><input type="text" id="canborrow" name="canborrow"/></td>
+            <td></td><td><input class="button" id="result" type="submit" value="Update" /></td>
+            </tr>
+            </table>
             </form>
-            <table class="table" id="table">
-            <th>ID</th><th>User Name</th><th>Password</th><th>Role</th>
+            <br>
+            <center><input id="search" type="text" placeholder="Search.."></center>
+            <br>
+            <table id="table">
+            <thead>
+            <tr>
+            <th>ID</th><th>User Name</th><th>Password</th><th>Role</th><th>Ticket Number</th><th>Quantity Can Borrow</th><th>Can Borrow</th>
+            </tr>
+            <thead>
             <c:forEach var="user" items="${list}">
+            <tbody id="myTable">
             <tr>
             <td>${user.id}</td>
             <td>${user.userName}</td>
             <td>${user.passWord}</td>
             <td>${user.role}</td>
+			<td>${user.ticketNumber}</td>
+            <td>${user.quantityOfBookCanBorrow}</td>
+            <td>${user.canBorrow}</td>
             <%-- <td><a href="<c:url value='/updateuser${user.id}'></c:url>">Edit</a></td> --%>
             <td><a href="#" id="edit">Edit</a></td>
             </td>
             <td><a href="<c:url value='/deleteuser${user.id}'></c:url>">Delete</a></td>
             </tr>
+            </tbody>
             </c:forEach>
             </table>
             </div>
