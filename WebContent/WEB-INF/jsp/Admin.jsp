@@ -16,8 +16,21 @@
     <link href="style/assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="style/dist/css/style.min.css" rel="stylesheet">
+<script>
+    function myFunction(){
+    	var role = document.getElementById("role").value;
+    	if(role =='admin'){
+        }else if(role =='management'){
+        	 	$('#usermanagement').hide();
+            }else{
+        	 	$('#usermanagement').hide();
+        	 	$('#bookmanagement').hide();
+        	 	$('#ticketmanagement').hide();
+            }
+    }
+</script>
 </head>
-<body>
+<body  onload="myFunction()">
 <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -194,6 +207,7 @@
 			%>
 			<strong><%=session.getAttribute("username") %></strong>
 			<%} %></a>
+								<input id ="role" value="<%=session.getAttribute("role") %>" type="hidden"/>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
                                 <div class="dropdown-divider"></div>
@@ -223,10 +237,10 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<c:url value="/usermanagement" />" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Quản lí user</span></a></li>
+                        <li class="sidebar-item" id = "usermanagement"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<c:url value="/usermanagement" />" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">User Management</span></a></li>
                         
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<c:url value="/bookmanagement" />" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Quản lí sách</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<c:url value="/ticketmanagement" />" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Quản lí thẻ thư viện</span></a></li>
+                        <li class="sidebar-item" id="bookmanagement"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<c:url value="/bookmanagement" />" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Book Management</span></a></li>
+                        <li class="sidebar-item" id ="ticketmanagement"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<c:url value="/ticketmanagement" />" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Ticket Management</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Tables</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="grid.html" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Full Width</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Forms </span></a>

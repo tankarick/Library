@@ -55,5 +55,12 @@ public class UserServiceImp implements UserService{
 		return userDao.findUser(id);
 		
 	}
+	
+	@Transactional
+	@Override
+	public User getRole(String userName) {
+		// TODO Auto-generated method stub
+		return userDao.getRole(userName);
+	}
 
 }

@@ -37,16 +37,14 @@ public class UserController {
 		if(username != null && password != null) {
 			User user = userService.getUserName(username, password);
 			if(user != null) {
+				String role = user.getRole();
 				session.setAttribute("username", username);
-				session.setAttribute("password", password);
-				//RequestDispatcher dispatcher = request.getRequestDispatcher("../Admin");
-				//dispatcher.forward(request, response);
-				//model.addAttribute("sucess", username);
+				session.setAttribute("role", role);
 				return "Admin";
 				
 			}else {
 				model.addAttribute("sucess", "Fail!");
-				return "Fail";
+				return "Login";
 			}
 		}
 		//return "Login";
@@ -71,14 +69,16 @@ public class UserController {
 				User u = new User();
 				u.setUserName(username);
 				u.setPassWord(password);
-				u.setIsAdmin(0);
+				u.setRole("student");
 				userService.addUser(u);
 				model.addAttribute("message", u);
+				return "Login";
 			}else {
 				model.addAttribute("message", "Fail!");
+				return "Register";
 			}
 		}
-		return "Register";
+		return null;
 	}
 	@RequestMapping("/admin")
 	public String admin(HttpServletRequest request, Model model,  HttpServletResponse response) throws ServletException, IOException {
@@ -105,10 +105,12 @@ public class UserController {
 		int id = Integer.parseInt(request.getParameter("id").toString());
 		String userName = request.getParameter("userName");
 		String passWord = request.getParameter("passWord");
+		String role = request.getParameter("role");
 		User u = new User();
 		u.setId(id);
 		u.setUserName(userName);
 		u.setPassWord(passWord);
+		u.setRole(role);
 		userService.updateUser(u);
 		List<User> list = userService.getAllUser();
 		model.addAttribute("list",list);

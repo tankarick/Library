@@ -66,5 +66,12 @@ public class UserDAOImp implements UserDAO {
 		return (User) query.uniqueResult();
 		
 	}
+	@Transactional
+	@Override
+	public User getRole(String userName) {
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM user WHERE username=:name");
+		query.setString("name", userName);
+		return (User) query.uniqueResult();
+	}
 
 }

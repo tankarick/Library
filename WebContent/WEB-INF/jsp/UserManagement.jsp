@@ -22,15 +22,28 @@
     $(function () {
         $('#table ${"#edit"}').click(function (e) {
             e.preventDefault();
-            $('#userName').val($(this).closest('tr').find('td:nth-child(2)').text()); //Hoặc lấy giá trị cột thứ 2
-            $('#passWord').val($(this).closest('tr').find('td:nth-child(3)').text()); //Hoặc lấy giá trị cột thứ 2
-            $('#id').val($(this).closest('tr').find('td:first').text()); //Hoặc lấy giá trị cột thứ 2
+            $('#id').val($(this).closest('tr').find('td:first').text()); 
+            $('#userName').val($(this).closest('tr').find('td:nth-child(2)').text()); 
+            $('#passWord').val($(this).closest('tr').find('td:nth-child(3)').text());           
+            $('#role').val($(this).closest('tr').find('td:nth-child(4)').text());
         });
     });
 </script>
+<script>
+    function myFunction(){
+    	var role = document.getElementById("role").value;
+    	if(role =='admin'){
+        }else if(role =='management'){
+        	 	$('#usermanagement').hide();
+            }else{
+        	 	$('#usermanagement').hide();
+        	 	$('#bookmanagement').hide();
+        	 	$('#ticketmanagement').hide();
+            }
+    }
+</script>
 </head>
-
-<body>
+<body  onload="myFunction()">
 <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -208,6 +221,7 @@
 			<strong><%=session.getAttribute("username") %></strong>
 			<%} %></a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                                <input id ="role" value="<%=session.getAttribute("role") %>" type="hidden"/>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
@@ -236,10 +250,10 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<c:url value="/usermanagement" />" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Quản lí user</span></a></li>
+                        <li class="sidebar-item" id = "usermanagement"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<c:url value="/usermanagement" />" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">User Management</span></a></li>
                         
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<c:url value="/bookmanagement" />" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Quản lí sách</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<c:url value="/ticketmanagement" />" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Quản lí thẻ thư viện</span></a></li>
+                        <li class="sidebar-item" id="bookmanagement"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<c:url value="/bookmanagement" />" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Book Management</span></a></li>
+                        <li class="sidebar-item" id ="ticketmanagement"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<c:url value="/ticketmanagement" />" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Ticket Management</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Tables</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="grid.html" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Full Width</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Forms </span></a>
@@ -321,15 +335,17 @@
             ID: <input type="text" id="id" name="id" readonly="readonly"/>
             User Name: <input type="text" id="userName" name="userName"/>
             Password: <input type="text" id="passWord" name="passWord"/>
+            Role: <input type="text" id="role" name="role"/>
             <input class="button" id="result" type="submit" value="Update"/><hr/>
             </form>
             <table class="table" id="table">
-            <th>ID</th><th>User Name</th><th>Password</th><th></th><th></th><th></th>
+            <th>ID</th><th>User Name</th><th>Password</th><th>Role</th>
             <c:forEach var="user" items="${list}">
             <tr>
             <td>${user.id}</td>
             <td>${user.userName}</td>
             <td>${user.passWord}</td>
+            <td>${user.role}</td>
             <%-- <td><a href="<c:url value='/updateuser${user.id}'></c:url>">Edit</a></td> --%>
             <td><a href="#" id="edit">Edit</a></td>
             </td>

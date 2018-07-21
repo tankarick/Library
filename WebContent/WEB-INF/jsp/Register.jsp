@@ -1,14 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta charset="UTF-8">
-<title>Login</title>
-<link rel="stylesheet" href="style/css1/style.css">
-</head>
-<body>
-	<h1>Hello ${message}</h1>
-</body>
+	<head>
+		<title>Register Form</title>
+		<link rel="stylesheet" type="text/css" href="style/style.css"/>
+		<script src="style/registerScript.js"></script>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<style>
+			.login-box{height: 600px;}
+		</style>
+	</head>
+	<body>
+		<div class="login-box">
+			<img src="style/avatar.png" class="avatar">
+			<h1>Register new account</h1>
+			<form method="POST" action="register">
+				<p>Username</p>
+				<input type="text" name="username" placeholder="Enter username" id="username">
+				<p>Password</p>
+				<input type="password" name="password" placeholder="Enter password" id="password">
+				<p>Password Confirm</p>
+				<input type="password" name="passwordConfirm" placeholder="Confirm password" id="passwordConfirm">
+				<input type="submit" name="submit" value="Register" id="register" onclick="return validateForm()">
+				<p class="center">Account already exists !</p>
+			</form>
+			<a href="index.jsp">Login</a>
+		</div>	
+	</body>
 </html>

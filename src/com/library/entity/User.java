@@ -1,5 +1,7 @@
 package com.library.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,17 +23,15 @@ public class User {
 	@Column(name = "password")
 	private String passWord;
 	
-	@Column(name = "isadmin")
-	private int isAdmin;
-	
-	
+	@Column(name = "role")
+	private String role;
 
-	public int getIsAdmin() {
-		return isAdmin;
+	public String getRole() {
+		return role;
 	}
 
-	public void setIsAdmin(int isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public int getId() {

@@ -15,7 +15,7 @@
 		<div class="login-box">
 			<img src="style/avatar.png" class="avatar">
 			<h1>Register new account</h1>
-			<form method="POST" onsubmit="return confirm('Click Ok to register account?')" action="register">
+			<form method="POST" action="register">
 				<p>Username</p>
 				<input type="text" name="username" placeholder="Enter username" id="username">
 				<p>Password</p>
