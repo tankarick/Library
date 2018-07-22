@@ -9,45 +9,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "user")
-public class User implements Serializable{
-	
+@Entity(name = "users")
+public class Users implements Serializable {
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
+	@Column(name = "username")
+	private String userName;
+
+	@Column(name = "password")
+	private String passWord;
+
+	@Column(name = "role")
+	private String role;
+
+	@Column(name = "quantitycanborrow")
+	private int quantityOfBookCanBorrow;
+
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	@Column(name = "ticketnumber")
-	private int ticketNumber;
-	
-	@Column(name = "username")
-	private String userName;
-	
-	@Column(name = "password")
-	private String passWord;
-	
-	@Column(name = "role")
-	private String role;
-	
-	@Column(name = "quantitycanborrow")
-	private int quantityOfBookCanBorrow;
-	
-	@Column(name = "canborrow")
-	private int canBorrow;
-
-	public int getTicketNumber() {
-		return ticketNumber;
-	}
-
-	public void setTicketNumber(int ticketNumber) {
-		this.ticketNumber = ticketNumber;
 	}
 
 	public String getUserName() {
@@ -66,8 +53,6 @@ public class User implements Serializable{
 		this.passWord = passWord;
 	}
 
-	
-
 	public String getRole() {
 		return role;
 	}
@@ -84,17 +69,6 @@ public class User implements Serializable{
 		this.quantityOfBookCanBorrow = quantityOfBookCanBorrow;
 	}
 
-	public int getCanBorrow() {
-		return canBorrow;
-	}
-
-	public void setCanBorrow(int canBorrow) {
-		this.canBorrow = canBorrow;
-	}
-	
 	
 
-	
-	
-	
 }

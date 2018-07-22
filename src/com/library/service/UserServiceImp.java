@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.library.dao.UserDAO;
-import com.library.entity.User;
+import com.library.entity.Users;
 @Service
 public class UserServiceImp implements UserService{
 
@@ -16,49 +16,50 @@ public class UserServiceImp implements UserService{
 	
 	@Transactional
 	@Override
-	public void addUser(User user) {
+	public void addUser(Users user) {
 		userDao.addUser(user);
 		
 	}
-
+	@Transactional
 	@Override
-	public User getUserByName(String userName) {
+	public Users getUserByName(String userName) {
 		
 		return userDao.getUserByName(userName);
 	}
 	@Transactional
 	@Override
-	public void deleteUser(User user) {
+	public void deleteUser(Users user) {
 		// TODO Auto-generated method stub
 		userDao.deleteUser(user);
 	}
 	@Transactional
 	@Override
-	public void updateUser(User user) {
+	public void updateUser(Users user) {
 		// TODO Auto-generated method stub
 		userDao.updateUser(user);		
 	}
 	@Transactional
 	@Override
-	public List<User> getAllUser() {
+	public List<Users> getAllUser() {
 		
 		return userDao.getAllUser();
 	}
-
+	@Transactional
 	@Override
-	public User getUserName(String userName, String password) {
+	public Users getUserName(String userName, String password) {
 		return userDao.getUserName(userName, password);
 		
 	}
+	@Transactional
 	@Override
-	public User findUser(int id) {
+	public Users findUser(int id) {
 		return userDao.findUser(id);
 		
 	}
 	
 	@Transactional
 	@Override
-	public User getRole(String userName) {
+	public Users getRole(String userName) {
 		// TODO Auto-generated method stub
 		return userDao.getRole(userName);
 	}

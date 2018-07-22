@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.library.dao.UserDAOImp;
-import com.library.entity.User;
+import com.library.entity.Users;
 import com.library.service.UserService;
 import com.library.service.UserServiceImp;
 
 @Controller
 public class UserController {
-	
+		
 	@Autowired
 	UserService userService;	
 	@RequestMapping("/login")
@@ -35,7 +35,7 @@ public class UserController {
 		String username = request.getParameter("username").toString();
 		String password = request.getParameter("password").toString();
 		if(username != null && password != null) {
-			User user = userService.getUserName(username, password);
+			Users user = userService.getUserName(username, password);
 			if(user != null) {
 				String role = user.getRole();
 				session.setAttribute("username", username);
@@ -64,21 +64,21 @@ public class UserController {
 		String password = request.getParameter("password").toString();
 		
 		if(username != null) {
-			User user = userService.getUserByName(username);
+			Users user = userService.getUserByName(username);
 			if(user == null) {
-				User u = new User();
+				Users u = new Users();
 				u.setUserName(username);
 				u.setPassWord(password);
 				u.setRole("student");
-				u.setCanBorrow(0);
-				u.setQuantityOfBookCanBorrow(0);
+				
+				u.setQuantityOfBookCanBorrow(5);
 				userService.addUser(u);
-				model.addAttribute("message", u);
+				return "Login";
 			}else {
-				model.addAttribute("message", "Fail!");
+				return "Register";
 			}
 		}
-		return "Register";
+		return null;
 	}
 	@RequestMapping("/admin")
 	public String admin(HttpServletRequest request, Model model,  HttpServletResponse response) throws ServletException, IOException {
@@ -88,7 +88,7 @@ public class UserController {
 	}
 	@RequestMapping(value ="/usermanagement", method = RequestMethod.GET)
 	public String userManagement(HttpServletRequest request, Model model,  HttpServletResponse response) throws ServletException, IOException {
-		List<User> list = userService.getAllUser();
+		List<Users> list = userService.getAllUser();
 		model.addAttribute("list",list);
 		return "UserManagement";		
 	}
@@ -103,27 +103,23 @@ public class UserController {
 		String userName = request.getParameter("userName");
 		String passWord = request.getParameter("passWord");
 		String role = request.getParameter("roless");
-		int ticketnumber = Integer.parseInt(request.getParameter("ticketnumber"));
-		int quantitycanborrow = Integer.parseInt(request.getParameter("quantitycanborrow"));
-		int canborrow = Integer.parseInt(request.getParameter("canborrow"));
-		User u = new User();
+		int limitBorrowingBook = Integer.parseInt(request.getParameter("limitBorrowingBook"));
+		Users u = new Users();
 		u.setId(id);
 		u.setUserName(userName);
 		u.setPassWord(passWord);
 		u.setRole(role);
-		u.setTicketNumber(ticketnumber);
-		u.setQuantityOfBookCanBorrow(quantitycanborrow);
-		u.setCanBorrow(canborrow);
+		u.setQuantityOfBookCanBorrow(limitBorrowingBook);
 		userService.updateUser(u);
-		List<User> list = userService.getAllUser();
+		List<Users> list = userService.getAllUser();
 		model.addAttribute("list",list);
 		return "UserManagement";		
 	}
 	@RequestMapping(value ="/deleteuser{id}", method = RequestMethod.GET)
 	public String deleteUser(@PathVariable int id, Model model,  HttpServletRequest request) throws ServletException, IOException {
-		User u = userService.findUser(id);
+		Users u = userService.findUser(id);
 		userService.deleteUser(u);
-		List<User> list = userService.getAllUser();
+		List<Users> list = userService.getAllUser();
 		model.addAttribute("list",list);
 		return "UserManagement";		
 	}

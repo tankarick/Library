@@ -23,13 +23,16 @@
 				<prop key="hibernate.hbm2ddl.auto">update</prop> 
 				<prop key="use_sql_comments">true</prop>
 <!-- 				<prop key="hibernate.default_schema">dbo</prop> -->
-				<prop key="mappingResources">com.demo.entity.Student</prop>
+				<prop key="mappingResources">com.demo.entity</prop>
 				<!-- manage by hibernate -->
 <!-- 				<prop key="current_session_context_class">thread</prop> -->
 			</props>
 		</property>
 		<property name="annotatedClasses">
-			<list><value>com.library.entity.User</value></list>
+			<list><value>com.library.entity.Users</value>
+				<value>com.library.entity.Tickets</value>
+				<value>com.library.entity.Books</value>
+			</list>
 		</property>
 		<!-- maybe use define in here <property name="mappingResources"> <property 
 			name="annotatedClasses" > <list> ... </list> </property> -->

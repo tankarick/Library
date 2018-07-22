@@ -2,16 +2,16 @@ package com.library.dao;
 
 import java.util.List;
 
+import javax.management.Query;
+import javax.transaction.Transactional;
 
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.library.entity.Book;
-import com.library.entity.User;
+import com.library.entity.Books;
 @Repository
+@Transactional
 public class BookDAOImp implements BookDAO{
 
 	@Autowired
@@ -19,52 +19,43 @@ public class BookDAOImp implements BookDAO{
 	
 	@Transactional
 	@Override
-	public void insertBook(Book book) {
+	public void insertBook(Books book) {
 		sessionFactory.getCurrentSession().save(book);
 		
 	}
 
 	@Transactional
 	@Override
-	public void deleteBook(Book book) {
+	public void deleteBook(Books book) {
 		sessionFactory.getCurrentSession().delete(book);
 		
 	}
-	@Transactional
+
 	@Override
-	public void updateBook(Book book) {
+	public void updateBook(Books book) {
 		sessionFactory.getCurrentSession().update(book);
 		
 	}
 
 	@Transactional
 	@Override
-	public List<Book> getAllBook() {
-		List<Book> list = sessionFactory.getCurrentSession().createQuery("FROM book").list();
+	public List<Books> getAllBook() {
+		List<Books> list = sessionFactory.getCurrentSession().createQuery("FROM books").list();
 		return list;
 	}
 
 	@Transactional
 	@Override
-	public Book getBookByID(int bookID) {
+	public Books getBookByID(int bookID) {
 		
-		return (Book) sessionFactory.getCurrentSession().get(Book.class, bookID);
+		return (Books) sessionFactory.getCurrentSession().get(Books.class, bookID);
 	}
 
 	@Override
-	public Book getBookByName(String bookName) {
-		Query query = sessionFactory.getCurrentSession().createQuery("FROM book where name=:name");
+	public Books getBookByName(String bookName) {
+		org.hibernate.Query query = sessionFactory.getCurrentSession().createQuery("FROM books where name=:name");
 		query.setString("name", bookName);
-		return (Book) query.uniqueResult();
-	}
-	@Transactional
-	@Override
-	public Book findBook(int bookID) {
-		// TODO Auto-generated method stub
-		Query query = sessionFactory.getCurrentSession().createQuery("FROM book WHERE id=:id");
-		query.setInteger("id", bookID);
-		return (Book) query.uniqueResult();
-		
+		return (Books) query.uniqueResult();
 	}
 
 }

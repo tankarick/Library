@@ -46,10 +46,6 @@ $(document).ready(function(){
 </script>
 <script>
     function myFunction(){
-    	/* $("#validation").hide();
-		$("#edit").click(function(){
-			$("#validation").show();
-		}); */
     	var role = document.getElementById("role").value;
     	if(role =='admin'){
         }else if(role =='management'){
@@ -368,22 +364,18 @@ tr:nth-child(even) {
             <!-- ============================================================== -->
             <div class="container-fluid">
             <form id="validation" action="updateuser" method="POST">
+            <input type="hidden" id="id" name="id" />
             <table class="table">
             <tr>
-            <td>ID: </td><td><input type="text" id="id" name="id" readonly="readonly"/></td>
             <td>User Name:</td><td><label for="userName"><input type="text" id="userName" name="userName"/></label></td>
-            </tr>
-            <tr>
             <td>Password:</td><td><input type="text" id="passWord" name="passWord"/></td>
+            </tr>
+            <tr>            
             <td>Role: </td><td><input type="text" id="roless" name="roless"/></td>
+            <td>Limitation of borrowing book: </td><td><input type="text" id="ticketnumber" name="limitBorrowingBook"/></td>
             </tr>
-            <tr>
-            <td>Ticket Number: </td><td><input type="text" id="ticketnumber" name="ticketnumber"/></td>
-            <td>Quantity Can Borrow: </td><td><input type="text" id="quantitycanborrow" name="quantitycanborrow"/></td>
-            </tr>
-            <tr>
-            <td>Can Borrow: </td><td><input type="text" id="canborrow" name="canborrow"/></td>
-            <td></td><td><input class="button" id="result" type="submit" value="Update" /></td>
+            <tr>            
+            <td colspan="4"><center><input class="btn btn-success btn-lg" id="result" type="submit" value="Update" /></center></td>
             </tr>
             </table>
             </form>
@@ -393,7 +385,7 @@ tr:nth-child(even) {
             <table id="table">
             <thead>
             <tr>
-            <th>ID</th><th>User Name</th><th>Password</th><th>Role</th><th>Ticket Number</th><th>Quantity Can Borrow</th><th>Can Borrow</th>
+            <th>ID</th><th>User Name</th><th>Password</th><th>Role</th><th>Quantity Can Borrow</th><th>Action</th>
             </tr>
             <thead>
             <c:forEach var="user" items="${list}">
@@ -403,13 +395,9 @@ tr:nth-child(even) {
             <td>${user.userName}</td>
             <td>${user.passWord}</td>
             <td>${user.role}</td>
-			<td>${user.ticketNumber}</td>
             <td>${user.quantityOfBookCanBorrow}</td>
-            <td>${user.canBorrow}</td>
             <%-- <td><a href="<c:url value='/updateuser${user.id}'></c:url>">Edit</a></td> --%>
-            <td><a href="#" id="edit">Edit</a></td>
-            </td>
-            <td><a href="<c:url value='/deleteuser${user.id}'></c:url>">Delete</a></td>
+            <td><a href="#" id="edit">Edit</a>&nbsp/&nbsp<a href="<c:url value='/deleteuser${user.id}'></c:url>">Delete</a></td>
             </tr>
             </tbody>
             </c:forEach>

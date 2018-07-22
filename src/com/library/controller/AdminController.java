@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.library.entity.User;
+import com.library.entity.Users;
 import com.library.service.UserService;
 
 public class AdminController {

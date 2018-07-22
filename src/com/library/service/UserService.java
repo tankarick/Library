@@ -2,16 +2,16 @@ package com.library.service;
 
 import java.util.List;
 
-import com.library.entity.User;
+import com.library.entity.Users;
 
 public interface UserService {
 
-	public void addUser(User user);
-	public User getUserByName(String userName);
-	public void deleteUser(User user);
-	public void updateUser(User user);
-	public List<User> getAllUser();
-	public User getUserName(String userName, String password);
-	public User findUser(int id);
-	public User getRole(String userName);
+	public void addUser(Users user);
+	public Users getUserByName(String userName);
+	public void deleteUser(Users user);
+	public void updateUser(Users user);
+	public List<Users> getAllUser();
+	public Users getUserName(String userName, String password);
+	public Users findUser(int id);
+	public Users getRole(String userName);
 }

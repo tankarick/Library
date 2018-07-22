@@ -27,11 +27,12 @@
             e.preventDefault();
             $('#id').val($(this).closest('tr').find('td:first').text()); 
             $('#updatetitle').val($(this).closest('tr').find('td:nth-child(2)').text()); 
-            $('#updatecategory').val($(this).closest('tr').find('td:nth-child(3)').text());           
-            $('#updateisbn').val($(this).closest('tr').find('td:nth-child(4)').text());
-            $('#updateprice').val($(this).closest('tr').find('td:nth-child(5)').text());
-            $('#updatequantity').val($(this).closest('tr').find('td:nth-child(6)').text());
-            $('#updateremain').val($(this).closest('tr').find('td:nth-child(7)').text());
+            $('#updateauthor').val($(this).closest('tr').find('td:nth-child(3)').text());           
+            $('#updatecategory').val($(this).closest('tr').find('td:nth-child(4)').text());
+            $('#updateisbn').val($(this).closest('tr').find('td:nth-child(5)').text());
+            $('#updateprice').val($(this).closest('tr').find('td:nth-child(6)').text());
+            $('#updatequantity').val($(this).closest('tr').find('td:nth-child(7)').text());
+            $('#updateremain').val($(this).closest('tr').find('td:nth-child(8)').text());
         });
     });
 </script>
@@ -47,14 +48,17 @@ $(document).ready(function(){
 </script>
 <script>
 	function myFunction() {
+		$("#validation").hide();
  		$("#showtable a").click(function(){
-			$("#showtable").hide();
+// 			$("#showtable").hide();
+			$("#validation").show();
+			$("#formAddBook").hide();
 		}); 
 		$("#formAddBook").hide();
 		$("#addBookForm").click(function(){
 			$("#formAddBook").slideToggle();
 			$("#validation").hide();
-			$("#showtable").hide();
+// 			$("#showtable").hide();
 		});
 		var role = document.getElementById("role").value;
 		if (role == 'admin') {
@@ -456,16 +460,17 @@ tr:nth-child(even) {
 			<!-- Container fluid  -->
 			<!-- ============================================================== -->
 			<div class="container-fluid">	
-			<center><button type="submit" class="btn btn-success btn-lg" id="addBookForm">Add Book</button ></center>
+			
             <div id="showtable">
 				<p align="right">
-					<label>Search &nbsp</label> <input type="text" id="search"placeholder="Search.."/>
+					<input type="text" id="search"placeholder="Search.."/>
 				</p>
 				<table class="table" id="table">
 					<thead>
 						<tr>
 							<th scope="col">ID</th>
 							<th scope="col">Book's Title</th>
+							<th scope="col">Author</th>
 							<th scope="col">Category</th>
 							<th scope="col">ISBN</th>
 							<th scope="col">Price</th>
@@ -478,14 +483,15 @@ tr:nth-child(even) {
 						<c:forEach items="${listbook}" var="item">
 							<tr>
 								<td>${item.bookID}</td>
-								<td>${item.bookName}</td>
+								<td>${item.bookTitle}</td>
+								<td>${item.author}</td>
 								<td>${item.category}</td>
 								<td>${item.isbnNumber}</td>
 								<td>${item.price}</td>
 								<td>${item.quantity}</td>
-								<td></td>
+								<td>${item.remain}</td>
 								<%-- <td><a href="<c:url value='/updateBook${item.bookID}'></c:url>" id="edit">Update</a>&nbsp/&nbsp<a href="<c:url value='/deleteBook${item.bookID}'></c:url>">Delete</a></td> --%>
-								<td><a href="#" id="editbook">Update</a>&nbsp/&nbsp<a href="<c:url value='/deleteBook${item.bookID}'></c:url>">Delete</a></td>
+								<td><a href="#" id="editbook">Edit</a>&nbsp/&nbsp<a href="<c:url value='/deleteBook${item.bookID}'></c:url>">Delete</a></td>
 							</tr>
 						</c:forEach>
 
@@ -496,23 +502,48 @@ tr:nth-child(even) {
 					<br/>
 					<br/>
 					<form:form action="addBook" method="POST" modelAttribute="addBook" id="formAddBook">
+					<table class="table">
 						<form:hidden path="bookID"/>
-						Title<br>
-						<form:input path="bookName" size="50dp" /><br>
-						Author<br>
-						<form:input path="author" size="50dp"/><br>
-						Category<br>
-						<form:input path="category" size="50dp"/><br>
-						ISBN<br>
-						<form:input path="isbnNumber" size="50dp"/><br>
-						Price<br>
-						<form:input path="price" size="50dp" /><br>
-						Quantity<br>
-						<form:input path="quantity" size="50dp"/><br/>
-						<input type="submit" value="Add" size="40dp"><input type="reset" value="Reset" size="40dp">
+						<tr>
+						<td>Title :</td>
+						<td><form:input path="bookTitle" size="130dp" /></td>
+						</tr>
+						<tr>
+						<td>Author</td>
+						<td><form:input path="author" size="130dp"/></td>
+						</tr>
+						<tr>
+						<td>Category</td>
+						<td><form:input path="category" size="130dp"/></td>
+						</tr>
+						<tr>
+						<td>ISBN</td>
+						<td><form:input path="isbnNumber" size="130dp"/></td>
+						</tr>
+						<tr>
+						<td>Price</td>
+						<td><form:input path="price" size="130dp" /></td>
+						</tr>
+						<tr>
+						<td>Quantity</td>
+						<td><form:input path="quantity" size="130dp"/></td>
+						</tr>
+						<tr>
+						<td>Remain</td>
+						<td><form:input path="remain" size="130dp"/></td>
+						</tr>
+						<tr>
+						<td>Image</td>
+						<td><form:input path="imageBook" size="130dp"/><input type="file" name="file" size="5dp" /></td>
+						</tr>
+						<tr>
+						<td></td><td><input type="submit" value="Add" size="40dp"><input type="reset" value="Reset" size="40dp"></td>
+						</tr>
+					</table>
 					</form:form>
 					
 				</div>
+				<center><button type="submit" class="btn btn-success btn-lg" id="addBookForm">Add Book</button ></center>
 			<form:form id="validation" action="updatebook" method="POST">
             <table class="table">
             <tr>
@@ -520,6 +551,8 @@ tr:nth-child(even) {
             </tr>
             <tr>
             <td>Title:</td><td><input type="text" id="updatetitle" name="updatetitle" size="130dp"/></td>
+            </tr>
+            <td>Author:</td><td><input type="text" id="updateauthor" name="updateauthor" size="130dp"/></td>
             </tr>
             <tr>
             <td>Category:</td><td><input type="text" id="updatecategory" name="updatecategory" size="130dp"/></td>
@@ -537,7 +570,7 @@ tr:nth-child(even) {
             <td>Remain: </td><td><input type="text" id="updateremain" name="updateremain" size="130dp"/></td>
             </tr>
             <tr>
-            <td></td><td><input class="button" id="result" type="submit" value="Update" /></td>
+            <td></td><td><input class="btn btn-success btn-lg" id="result" type="submit" value="Update" /></td>
             </tr>
             </table>
             </form:form>

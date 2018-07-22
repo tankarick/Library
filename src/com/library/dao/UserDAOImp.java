@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.library.entity.User;
+import com.library.entity.Users;
 
 @Repository
 public class UserDAOImp implements UserDAO {
@@ -17,61 +17,61 @@ public class UserDAOImp implements UserDAO {
 	SessionFactory sessionFactory;
 
 	@Override
-	public void addUser(User user) {
+	public void addUser(Users user) {
 		sessionFactory.getCurrentSession().save(user);
 
 	}
 	@Transactional
 	@Override
-	public User getUserByName(String userName) {
-		Query query = sessionFactory.getCurrentSession().createQuery("FROM user WHERE username=:name");
+	public Users getUserByName(String userName) {
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM users WHERE username=:name");
 		query.setString("name", userName);
-		return (User) query.uniqueResult();
+		return (Users) query.uniqueResult();
 	}
 	@Transactional
 	@Override
-	public void deleteUser(User user) {
+	public void deleteUser(Users user) {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().delete(user);
 	}
 	@Transactional
 	@Override
-	public void updateUser(User user) {
+	public void updateUser(Users user) {
 		sessionFactory.getCurrentSession().update(user);
 	}
-
+	@Transactional
 	@Override
-	public List<User> getAllUser() {
+	public List<Users> getAllUser() {
 		
-		return (List<User>) sessionFactory.getCurrentSession().createQuery("from user").list();
+		return (List<Users>) sessionFactory.getCurrentSession().createQuery("from users").list();
 	}
 	@Transactional
 	@Override
 	//o day chi truyen vao duoc ID cua clas entity thôi. 
-	public User getUserName(String userName, String passWord) {
+	public Users getUserName(String userName, String passWord) {
 		//Em dung cau lenh HQL o day. 
 		// FROM Ủe ƯHEE userName = ? //// xem hql 
-		Query query = sessionFactory.getCurrentSession().createQuery("FROM user WHERE username=:name and password=:pass");
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM users WHERE username=:name and password=:pass");
 		query.setString("name", userName);
 		query.setString("pass", passWord);
-		return (User) query.uniqueResult();
+		return (Users) query.uniqueResult();
 
 	}
 	@Transactional
 	@Override
-	public User findUser(int id) {
+	public Users findUser(int id) {
 		// TODO Auto-generated method stub
-		Query query = sessionFactory.getCurrentSession().createQuery("FROM user WHERE id=:id");
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM users WHERE id=:id");
 		query.setInteger("id", id);
-		return (User) query.uniqueResult();
+		return (Users) query.uniqueResult();
 		
 	}
 	@Transactional
 	@Override
-	public User getRole(String userName) {
-		Query query = sessionFactory.getCurrentSession().createQuery("FROM user WHERE username=:name");
+	public Users getRole(String userName) {
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM users WHERE username=:name");
 		query.setString("name", userName);
-		return (User) query.uniqueResult();
+		return (Users) query.uniqueResult();
 	}
 
 }

@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.library.entity.Book;
-import com.library.entity.User;
+import com.library.entity.Books;
 import com.library.service.BookService;
 
 @Controller
@@ -26,24 +25,24 @@ public class BookController {
 	@Autowired
 	BookService bookService;
 	
-	@RequestMapping(value = "/addBook")
+	/*@RequestMapping(value = "/addBook")
 	public String addBook(Model model) {
-		model.addAttribute("addBook", new Book());
+		model.addAttribute("addBook", new Books());
 		return "BookManagement";
-	}
+	}*/
 	
 	@RequestMapping(value = "/bookmanagement", method = RequestMethod.GET)
 	public String getAllBook(Model model, HttpServletRequest request) {
-		List<Book> list = bookService.getAllBook();
+		List<Books> list = bookService.getAllBook();
 		model.addAttribute("listbook", list);
-		request.setAttribute("addBook", new Book());
+		request.setAttribute("addBook", new Books());
 		return "BookManagement";
 	}
 	
 	@RequestMapping(value = "/addBook", method = RequestMethod.POST)
-	public ModelAndView addBook(ModelMap model, HttpServletRequest request, @ModelAttribute("addBook") Book book) {
+	public ModelAndView addBook(ModelMap model, HttpServletRequest request, @ModelAttribute("addBook") Books book) {
 		bookService.insertBook(book);
-		List<Book> list = bookService.getAllBook();
+		List<Books> list = bookService.getAllBook();
 		model.addAttribute("listbook", list);
 		return new ModelAndView("redirect:/bookmanagement", model);
 	}
@@ -51,7 +50,7 @@ public class BookController {
 	@RequestMapping("/deleteBook{bookID}")
 	public String deleteBook(@PathVariable("bookID") int bookID) {
 		
-		Book book = bookService.getBookByID(bookID);
+		Books book = bookService.getBookByID(bookID);
 		bookService.deleteBook(book);
 		return "redirect:/bookmanagement";
 	}
@@ -59,20 +58,23 @@ public class BookController {
 	public String updateBook(Model model,  HttpServletRequest request) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id").toString());
 		String title = request.getParameter("updatetitle");
+		String author = request.getParameter("updateauthor");
 		String category = request.getParameter("updatecategory");		
 		String updateisbn = request.getParameter("updateisbn");		
-		double updateprice = Double.parseDouble(request.getParameter("updateprice"));
+		int updateprice = Integer.parseInt(request.getParameter("updateprice"));
 		int updatequantity = Integer.parseInt(request.getParameter("updatequantity"));
-		/*int updateremain = Integer.parseInt(request.getParameter("updateremain"));*/
-		Book b = new Book();
+		int updateremain = Integer.parseInt(request.getParameter("updateremain"));
+		Books b = new Books();
 		b.setBookID(id);
-		b.setBookName(title);
+		b.setBookTitle(title);
+		b.setAuthor(author);
 		b.setCategory(category);
 		b.setIsbnNumber(updateisbn);
 		b.setPrice(updateprice);
 		b.setQuantity(updatequantity);
+		b.setRemain(updateremain);
 		bookService.updateBook(b);
-		List<Book> list = bookService.getAllBook();
+		List<Books> list = bookService.getAllBook();
 		model.addAttribute("listbook",list);
 		return "redirect:/bookmanagement";		
 	}

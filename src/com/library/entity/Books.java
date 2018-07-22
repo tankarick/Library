@@ -9,16 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "book")
-public class Book implements Serializable{
+@Entity(name = "books")
+public class Books implements Serializable{
 	
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int bookID;
 	
-	@Column(name = "name")
-	private String bookName;
+	@Column(name = "title")
+	private String bookTitle;
 	
 	@Column(name = "author")
 	private String author;
@@ -30,10 +30,25 @@ public class Book implements Serializable{
 	private int quantity;
 	
 	@Column(name = "price")
-	private double price;
+	private int price;
 	
 	@Column(name = "category")
 	private String category;
+	
+	@Column(name="remain")
+	private int remain;
+
+	@Column(name = "imagebook")
+	private String imageBook;
+	
+
+	public String getImageBook() {
+		return imageBook;
+	}
+
+	public void setImageBook(String imageBook) {
+		this.imageBook = imageBook;
+	}
 
 	public int getBookID() {
 		return bookID;
@@ -43,12 +58,12 @@ public class Book implements Serializable{
 		this.bookID = bookID;
 	}
 
-	public String getBookName() {
-		return bookName;
+	public String getBookTitle() {
+		return bookTitle;
 	}
 
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
+	public void setBookTitle(String bookTitle) {
+		this.bookTitle = bookTitle;
 	}
 
 	public String getAuthor() {
@@ -75,11 +90,11 @@ public class Book implements Serializable{
 		this.quantity = quantity;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
@@ -90,6 +105,16 @@ public class Book implements Serializable{
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
+	public int getRemain() {
+		return remain;
+	}
+
+	public void setRemain(int remain) {
+		this.remain = remain;
+	}
+
+	
 	
 	
 }

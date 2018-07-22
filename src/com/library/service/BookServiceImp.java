@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.library.dao.BookDAO;
-import com.library.entity.Book;
-import com.library.entity.User;
+import com.library.entity.Books;
 @Service
+@Transactional
 public class BookServiceImp implements BookService{
 	
 	@Autowired
@@ -18,47 +18,42 @@ public class BookServiceImp implements BookService{
 	
 	@Transactional
 	@Override
-	public void insertBook(Book book) {
+	public void insertBook(Books book) {
 		bookDAO.insertBook(book);
 		
 	}
 
 	@Transactional
 	@Override
-	public void deleteBook(Book book) {
+	public void deleteBook(Books book) {
 		bookDAO.deleteBook(book);
 		
 	}
 
 	@Override
-	public void updateBook(Book book) {
+	public void updateBook(Books book) {
 		bookDAO.updateBook(book);
 		
 	}
 
 	@Transactional
 	@Override
-	public List<Book> getAllBook() {
+	public List<Books> getAllBook() {
 		
 		return bookDAO.getAllBook();
 	}
 
 	@Transactional
 	@Override
-	public Book getBookByID(int bookID) {
+	public Books getBookByID(int bookID) {
 		
 		return bookDAO.getBookByID(bookID);
 	}
 
 	@Override
-	public Book getBookByName(String bookName) {
+	public Books getBookByName(String bookName) {
 		
 		return bookDAO.getBookByName(bookName);
-	}
-	@Override
-	public Book findBook(int bookID) {
-		return bookDAO.findBook(bookID);
-		
 	}
 
 }
