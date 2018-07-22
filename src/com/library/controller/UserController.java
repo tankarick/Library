@@ -92,10 +92,7 @@ public class UserController {
 		model.addAttribute("list",list);
 		return "UserManagement";		
 	}
-	@RequestMapping("/bookmanagement")
-	public String bookManagement(HttpServletRequest request, Model model,  HttpServletResponse response) throws ServletException, IOException {
-		return "BookManagement";		
-	}
+	
 	@RequestMapping("/ticketmanagement")
 	public String ticketManagement(HttpServletRequest request, Model model,  HttpServletResponse response) throws ServletException, IOException {
 		return "TicketManagement";		

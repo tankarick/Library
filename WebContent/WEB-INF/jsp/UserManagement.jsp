@@ -46,6 +46,10 @@ $(document).ready(function(){
 </script>
 <script>
     function myFunction(){
+    	/* $("#validation").hide();
+		$("#edit").click(function(){
+			$("#validation").show();
+		}); */
     	var role = document.getElementById("role").value;
     	if(role =='admin'){
         }else if(role =='management'){
